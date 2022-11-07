@@ -1,0 +1,208 @@
+== Define static vs dynamic typing
+
+
+== Define data types
+
+boolean
+float
+int
+string
+nil
+
+
+== Define arithmetic operators
+
+a + b
+a - b
+a * b
+a / b
+
+-a
+
+"Hello" + "World"
+
+
+== Define logical operators
+
+a > b
+a < b
+a >= b
+a <= b
+
+1 == 2
+1 != 2
+1 == "2"
+1 == "1"
+
+!true
+!false
+
+true and true
+true or false
+
+
+== Define basic precedence
+
+a + b * c == b*c + a
+(a + b) * c == a*c + b*c
+
+
+== Statements vs Expressions
+
+Expressions are evaluated
+Statements need to produce an effect..?
+
+
+== Declaring and defining varialbes
+
+var number = 1
+var nilVar
+
+
+== Control Flow
+
+== Conditionals
+if (something) {
+    print "something"
+}
+else if (something) {
+    print "something else"
+}
+else {
+    print "none"
+}
+
+== For loop
+
+for (var i = 0; i < 10; i = i+1) {
+    print i
+}
+
+== While loop
+
+var i = 0
+while (i < 10) {
+    print i
+    i = i+1
+}
+
+
+== Function definitions and invocations.
+
+fun add(a, b) { 
+    return a + b
+}
+
+return nil without explicit return.
+
+Params vs Arguments.
+
+
+== Closures and inner functions
+
+Can use functions as variables.
+
+Can define functions within functions.
+
+These functions can capture some context around them.
+
+
+== Classes, inheritance
+
+class Breakfast {
+    cook() {
+        print "Eggs a-fryin'!";
+    }
+
+    serve(who) {
+        print "Enjoy your breakfast, " + who + ".";
+    }
+}
+
+Instantiation:
+
+var breakfast = Breakfast()
+
+
+== Initialization
+
+breakfast.name = "Bla" // Create if doesn't exist.
+
+Use `this` to refer to fields of a particualr object.
+
+Can have initializers via `init()`
+
+
+== Inheritance
+
+Can inherit from a single class via `<` operator.
+Can reuse initializers via `base.init()`
+
+
+== Define standard library
+
+print()
+clock()
+
+
+
+== Write a scanner.
+
+Basically,
+Take the source, go line by line, and then char by char.
+
+Keep track of the line you are processing, and it's number.
+
+Keep track of the column you're in, and also the `starting` column, used for
+when you are collecting lexemes.
+
+Have each character go through a switch statement which catches for specific
+cases.
+
+Easiest are one char token, where you can just make and return a token.
+
+Two-char tokens require you to also see what's the next character going to be,
+and then advance the column and make that two-char token.
+
+More complex tokens require you to scan the line until a certain condition is
+met, like for example looking for a closing quote, or similar.
+
+Treat lone strings of text as keywords if they match the keyword dictionary,
+and as identifiers otherwise.
+
+Spaces and newlines can be ignored, but not necessarily.
+
+A choice must be made regarding explicit statement terminators via simicolons.
+In our case, this will not be implemented.
+
+Make use of stored line/linenum/colnums to enrich the logging.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+( (( )) ) >= > // Comments:
+()             // This is a comment and stuff here don't matter much...
+               // Same here
+
+> = >= < = <=    !   !=                     ==
+
+{({)}
+
+,.+-* /
+
+123
+123.123
+.123
+123.
+123.123.123
+
+"Some string", "some other    string" "
+
+"Multiline
+String"
+
+and oneliner oregon Orthogonal crazy for somewhererererererer while for and
+
+
+    True, False,
+    And, Or,
+    If, Else,
+    Class, Fun, Super, Return,
+    While, For,
+    Var, This,
+    Nil,
+
+    true, false,
+    and, or,
+    if, else,
+    class, fun, super, return,
+    while, for,
+    var, this,
+    nil,
+
+*/
