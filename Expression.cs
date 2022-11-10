@@ -10,28 +10,82 @@
 
 namespace CsLox;
 
-public abstract class Expression { }
-
-public class Binary : Expression
+public interface Visitor<T>
 {
+    T VisitBinaryExpression(BinaryExpression binary);
+    T VisitGroupingExpression(GroupingExpression grouping);
+    T VisitLiteralExpression(LiteralExpression literal);
+    T VisitUnaryExpression(UnaryExpression unary);
+}
+
+public abstract class Expression
+{
+    public abstract T Accept<T>(Visitor<T> visitor);
+}
+
+public class BinaryExpression : Expression
+{
+    public BinaryExpression(Expression left, LoxToken op, Expression right)
+    {
+        this.left = left;
+        this.op = op;
+        this.right = right;
+    }
+
     public Expression left;
     public LoxToken op;
     public Expression right;
+
+    public override T Accept<T>(Visitor<T> visitor)
+    {
+        return visitor.VisitBinaryExpression(this);
+    }
 }
 
-public class Grouping : Expression
+public class GroupingExpression : Expression
 {
+    public GroupingExpression(Expression expr)
+    {
+        this.expr = expr;
+    }
+
     public Expression expr;
+
+    public override T Accept<T>(Visitor<T> visitor)
+    {
+        return visitor.VisitGroupingExpression(this);
+    }
 }
 
-public class Literal : Expression
+public class LiteralExpression : Expression
 {
+    public LiteralExpression(object val)
+    {
+        this.val = val;
+    }
+
     public object val;
+
+    public override T Accept<T>(Visitor<T> visitor)
+    {
+        return visitor.VisitLiteralExpression(this);
+    }
 }
 
-public class Unary : Expression
+public class UnaryExpression : Expression
 {
+    public UnaryExpression(LoxToken op, Expression expr)
+    {
+        this.op = op;
+        this.expr = expr;
+    }
+
     public LoxToken op;
     public Expression expr;
+
+    public override T Accept<T>(Visitor<T> visitor)
+    {
+        return visitor.VisitUnaryExpression(this);
+    }
 }
 
