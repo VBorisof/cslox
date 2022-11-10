@@ -8,11 +8,39 @@ class Type:
         self.fields = list(map(lambda x: x.strip(' '), fields.split(',')))
 
     def print(self):
-        print(f"public class {self.className} : {self.baseClass}")
+        # Class declaration
+        print(f"public class {self.className}{self.baseClass} : {self.baseClass}")
         print(f"{{")
+
+        # Constructor
+        print(f"    public {self.className}{self.baseClass}({', '.join(self.fields)})")
+        print("    {")
+        for field in self.fields:
+            field_name = field.split(' ')[1]
+            print(f"        this.{field_name} = {field_name};")
+
+        print("    }")
+        print()
+
+        # Fields
         for field in self.fields:
             print (f"    public {field};")
+
+        print()
+
+        # Visitor
+        print("    public override T Accept<T>(Visitor<T> visitor)")
+        print("    {")
+        print(f"        return visitor.Visit{self.className}Expression(this);")
+        print("    }")
         print(f"}}")
+
+def print_visitor(types: list[Type]):
+    print("public interface Visitor<T>")
+    print("{")
+    for type in types:
+        print(f"    T Visit{type.className}Expression({type.className}Expression {type.className.lower()});")
+    print("}")
 
 def print_ast(types: list[Type]):
     f = open("./codegen-disclaimer.txt", 'r')
@@ -24,7 +52,12 @@ def print_ast(types: list[Type]):
     print()
     print("namespace CsLox;")
     print()
-    print(f"public abstract class Expression {{ }}")
+    print_visitor(types)
+    print()
+    print(f"public abstract class Expression")
+    print("{")
+    print("    public abstract T Accept<T>(Visitor<T> visitor);")
+    print("}")
     for type in types:
         print()
         type.print()
