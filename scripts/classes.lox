@@ -1,0 +1,15 @@
+class SomeClass {
+    doStuff() {
+        print "doStuff()"
+    }
+
+    doMoreStuff() {
+        print "doMoreStuff()"
+    }
+}
+
+fun main() {
+    var obj = SomeClass()
+    obj.doStuff()
+    obj.doMoreStuff()
+}
