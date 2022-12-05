@@ -61,6 +61,19 @@ namespace CsLox
             ConsoleEx.WriteLine($"    {message}\n", ConsoleColor.Red);
         }
 
+        // TODO: This was introduced to avoid retreiving the source on parsing,
+        // but maybe we can do something?..
+        public void ParserError(int lineNumber, int? colNumber, string message)
+        {
+            if (_level < LogLevel.Error) return;
+
+            ConsoleEx.WriteLine($"Error:\n", ConsoleColor.Red);
+            string marginColumn = $"    {lineNumber}:{colNumber} :";
+            ConsoleEx.Write(marginColumn, ConsoleColor.Yellow);
+            Console.WriteLine();
+            ConsoleEx.WriteLine($"    {message}\n", ConsoleColor.Red);
+        }
+
         public void Info(string message)
         {
             if (_level < LogLevel.Info) return;

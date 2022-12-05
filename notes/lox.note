@@ -178,6 +178,26 @@ In our case, this will not be implemented.
 Make use of stored line/linenum/colnums to enrich the logging.
 
 
+== Define Grammar
+
+One way is to define it in terms of Context-Free Grammar.
+Basically a finite set of rules that can generate expressions.
+
+Parser will then use the grammar to match expressions to grammar rules.
+
+Care must be taken to escape ambiguity where an expression can match multiple
+rules and hence interprepeted differently.
+
+Lox Grammar:
+
+expression -> equality ;
+equality   -> comparison ( ("!=" | "==") comparison)* ;
+comparison -> term ( (">" | ">=" | "<" | "<=") term )* ;
+term       -> factor ( ("-" | "+") factor )* ;
+factor     -> unary ( ("/" | "*") unary )* ;
+unary      -> ( "-" | "!" ) unary | primary ;
+primary    -> NUMBER | STRING | "true" | "false" | "nil" | "(" expression ")" ;
+
 
 
 
